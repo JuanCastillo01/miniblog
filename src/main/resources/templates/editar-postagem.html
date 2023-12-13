@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Postagem</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .card-body label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .card-body input,
+        .card-body textarea,
+        .card-body select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .card-body button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>My Mini Blog</h1>
+</header>
+
+<!-- Navigation bar -->
+<nav>
+    <a href="/listar-postagens">Lista de Postagens</a>
+    <a href="/create-postagem">Criar Postagem</a>
+</nav>
+
+<!-- Main content -->
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center">Editar Postagem</h1>
+
+            <form action="/atualizar-postagem" method="post">
+                <input type="hidden" id="id" name="id" th:value="${postagem.id}">
+
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" th:value="${postagem.titulo}" required>
+
+                <label for="corpo">Corpo:</label>
+                <textarea id="corpo" name="corpo" rows="4" required th:text="${postagem.corpo}"></textarea>
+
+                <label for="usuario">Usuário:</label>
+                <input type="text" id="usuario" name="usuario" th:value="${postagem.usuario}" required>
+
+                <label for="emocao">Emoção:</label>
+                <select id="emocao" name="emocao" required>
+                    <!-- Add options dynamically using Thymeleaf -->
+                    <option th:each="emo : ${emoList}" th:value="${emo.id}" th:text="${emo.nome}"
+                            th:selected="${emo.id == postagem.emocao.id}"></option>
+                </select>
+
+                <button type="submit">Atualizar Postagem</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

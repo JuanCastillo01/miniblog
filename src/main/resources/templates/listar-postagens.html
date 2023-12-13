@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        .card-columns {
+            column-count: 1; /* Adjust the number of columns as needed */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>My Mini Blog</h1>
+</header>
+
+<!-- Navigation bar -->
+<nav>
+    <a href="/listar-postagens">Lista de Postagens</a>
+    <a href="/create-postagem">Criar Postagem</a>
+    <a href="/admin">Administrar</a>
+</nav>
+
+<div class="container my-4 text-center">
+    <h1 class="text-center">Lista de Postagens</h1>
+
+    <div class="card-columns">
+        <div th:each="postagem : ${postagens}" class="card" th:style="'background-color: ' + ${postagem.emocao.cor}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${postagem.titulo}"></h5>
+                <p class="card-text" th:text="${postagem.corpo}"></p>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">Emoção: <span th:text="${postagem.emocao.nome}"></span></p>
+                    <p class="card-text">Usuário: <span th:text="${postagem.usuario}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- You can use locally hosted jQuery, Popper.js, and Bootstrap files if you prefer -->
+<!-- <script src="/path/to/jquery-3.5.1.slim.min.js"></script> -->
+<!-- <script src="/path/to/popper.min.js"></script> -->
+<!-- <script src="/path/to/bootstrap.min.js"></script> -->
+
+</body>
+</html>

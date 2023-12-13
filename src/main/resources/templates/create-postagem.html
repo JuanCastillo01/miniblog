@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Postagem</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            overflow: hidden; /* Add this to clear the float */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea, select {
+            width: calc(100% - 16px); /* Adjust the width to account for padding and border */
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        textarea#corpo {
+            white-space: pre-line; /* Preserve line breaks */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <h1>My Mini Blog</h1>
+</header>
+
+<!-- Navigation bar -->
+<nav>
+    <a href="/listar-postagens">Lista de Postagens</a>
+    <a href="/create-postagem">Criar Postagem</a>
+    <a href="/admin">Administrar</a>
+</nav>
+
+<!-- Main content -->
+<div>
+    <form action="/criar-postagem" method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <label for="corpo">Corpo:</label>
+        <textarea id="corpo" name="corpo" rows="4" required></textarea>
+
+        <label for="usuario">Usuário:</label>
+        <input type="text" id="usuario" name="usuario" required>
+
+        <label for="emocao">Emoção:</label>
+        <select id="emocao" name="emocao" required>
+            <!-- Add options dynamically using Thymeleaf -->
+            <option th:each="emo : ${emoList}" th:value="${emo.id}" th:text="${emo.nome}"></option>
+        </select>
+
+        <button type="submit">Criar Postagem</button>
+    </form>
+</div>
+
+</body>
+</html>
+
